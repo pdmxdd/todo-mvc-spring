@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>Index</title>
+    <title>Todo</title>
 </head>
+<form method="post" action="/todo">
+    <label>Name: <input type="text" id="name" name="name" /></label>
+    <input type="submit" value="add" />
+</form>
+<h2>TODO LIST:</h2>
 <body>
-
-Index
-
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mark Complete</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tr th:each="todo : ${TodoList}">
+            <td th:text="${todo.getName()}"></td>
+            <td><a th:href="@{'/todo/' + ${todo.getId()} + '/complete'}">Mark Complete</a></td>
+            <td><a th:href="@{'/todo/' + ${todo.getId()} + '/delete'}">Delete</a></td>
+        </tr>
+    </table>
 </body>
 </html>
